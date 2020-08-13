@@ -4,6 +4,9 @@ if [ -z "$UPLOAD_STORAGE" ]; then
   if [ -n "$UPLOAD_STORAGE_FILE" ]; then
     UPLOAD_STORAGE=$(cat "$UPLOAD_STORAGE_FILE")
     export UPLOAD_STORAGE
+  else
+    >&2 echo "UPLOAD_STORAGE is not set."
+    exit 1
   fi
 fi
 
