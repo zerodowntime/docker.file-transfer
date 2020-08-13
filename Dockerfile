@@ -38,4 +38,4 @@ RUN TMP=$(mktemp -d) && \
 #RUN pip3 install awscli
 
 # Copy wrappers/helpers scripts
-COPY *.sh /opt
+COPY *.sh /opt/
