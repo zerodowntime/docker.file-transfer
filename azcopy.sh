@@ -11,10 +11,10 @@ if [ -z "$UPLOAD_SOURCE" ]; then
 fi
 
 
-if [ -z "$ACCOUNT_NAME" ]; then
-  if [ -n "$ACCOUNT_NAME_FILE" ]; then
-    ACCOUNT_NAME=$(cat "$ACCOUNT_NAME_FILE")
-    export ACCOUNT_NAME
+if [ -z "$STORAGE_ACCOUNT_NAME" ]; then
+  if [ -n "$STORAGE_ACCOUNT_NAME_FILE" ]; then
+    STORAGE_ACCOUNT_NAME=$(cat "$STORAGE_ACCOUNT_NAME_FILE")
+    export STORAGE_ACCOUNT_NAME
   fi
 fi
 
@@ -33,7 +33,7 @@ if [ -z "$CONTAINER_PATH" ]; then
 fi
 
 
-container_url="https://${ACCOUNT_NAME:?}.blob.core.windows.net/${CONTAINER_NAME:?}"
+container_url="https://${STORAGE_ACCOUNT_NAME:?}.blob.core.windows.net/${CONTAINER_NAME:?}"
 container_path="${CONTAINER_PATH}"
 
 # Login service principal
