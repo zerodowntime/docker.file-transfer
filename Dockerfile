@@ -41,7 +41,8 @@ RUN TMP=$(mktemp -d) && \
 
 
 # awscli for AWS s3 transfer
-#RUN pip3 install awscli
+RUN pip3 install awscli
+
 
 # Copy wrappers/helpers scripts
 COPY *.sh /opt/
