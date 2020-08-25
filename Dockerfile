@@ -14,6 +14,12 @@ RUN yum -y install \
     && rm -rf /var/cache/yum /var/tmp/* /tmp/*
 
 
+# tiny but valid init for containers
+ARG TINI_VERSION=v0.19.0
+RUN curl -s -L https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini -o /tini && \
+    chmod +x /tini
+
+
 # jq comes to help for parsing JSON files
 RUN curl -s -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
       -o /usr/local/bin/jq && \
@@ -39,3 +45,6 @@ RUN TMP=$(mktemp -d) && \
 
 # Copy wrappers/helpers scripts
 COPY *.sh /opt/
+
+ENTRYPOINT ["/tini", "--"]
+CMD ["/bin/bash"]
