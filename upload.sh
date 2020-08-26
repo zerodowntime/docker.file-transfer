@@ -1,14 +1,8 @@
 #!/bin/bash -e
 
-if [ -z "$UPLOAD_STORAGE" ]; then
-  if [ -n "$UPLOAD_STORAGE_FILE" ]; then
-    UPLOAD_STORAGE=$(cat "$UPLOAD_STORAGE_FILE")
-    export UPLOAD_STORAGE
-  else
-    >&2 echo "UPLOAD_STORAGE is not set."
-    exit 1
-  fi
-fi
+source "${BASH_SOURCE%/*}/functions.sh"
+
+ensure-env UPLOAD_STORAGE
 
 case ${UPLOAD_STORAGE:?} in
   azcopy) /opt/azcopy.sh ;;

@@ -1,37 +1,15 @@
 #!/bin/bash -e
 
-if [ -z "$UPLOAD_SOURCE" ]; then
-  if [ -n "$UPLOAD_SOURCE_FILE" ]; then
-    UPLOAD_SOURCE=$(cat "$UPLOAD_SOURCE_FILE")
-    export UPLOAD_SOURCE
-  else
-    >&2 echo "UPLOAD_SOURCE is not set."
-    exit 1
-  fi
-fi
+source "${BASH_SOURCE%/*}/functions.sh"
 
+ensure-env UPLOAD_SOURCE
+ensure-env STORAGE_ACCOUNT_NAME
+ensure-env CONTAINER_NAME
+ensure-env CONTAINER_PATH ""
 
-if [ -z "$STORAGE_ACCOUNT_NAME" ]; then
-  if [ -n "$STORAGE_ACCOUNT_NAME_FILE" ]; then
-    STORAGE_ACCOUNT_NAME=$(cat "$STORAGE_ACCOUNT_NAME_FILE")
-    export STORAGE_ACCOUNT_NAME
-  fi
-fi
-
-if [ -z "$CONTAINER_NAME" ]; then
-  if [ -n "$CONTAINER_NAME_FILE" ]; then
-    CONTAINER_NAME=$(cat "$CONTAINER_NAME_FILE")
-    export CONTAINER_NAME
-  fi
-fi
-
-if [ -z "$CONTAINER_PATH" ]; then
-  if [ -n "$CONTAINER_PATH_FILE" ]; then
-    CONTAINER_PATH=$(cat "$CONTAINER_PATH_FILE")
-    export CONTAINER_PATH
-  fi
-fi
-
+ensure-env AZURE_CLIENT_SECRET
+ensure-env AZURE_TENANT_ID
+ensure-env AZURE_CLIENT_ID
 
 container_url="https://${STORAGE_ACCOUNT_NAME:?}.blob.core.windows.net/${CONTAINER_NAME:?}"
 container_path="${CONTAINER_PATH}"

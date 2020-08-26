@@ -43,6 +43,7 @@ RUN TMP=$(mktemp -d) && \
 # awscli for AWS s3 transfer
 RUN pip3 install awscli
 
+ENV UPLOAD_SECRETS_DIR /run/secrets
 
 # Copy wrappers/helpers scripts
 COPY *.sh /opt/
