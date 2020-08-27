@@ -2,6 +2,15 @@
 
 source "${BASH_SOURCE%/*}/functions.sh"
 
+if [ -n "$UPLOAD_SECRETS_DIR" ] && [ -d "$UPLOAD_SECRETS_DIR" ]; then
+  for f in $UPLOAD_SECRETS_DIR/*; do
+    [ -f "$f" ] || continue
+    env=$(basename $f)
+    val=$(cat $f)
+    export "$env=$val"
+  done
+fi
+
 ensure-env UPLOAD_STORAGE
 
 case ${UPLOAD_STORAGE:?} in

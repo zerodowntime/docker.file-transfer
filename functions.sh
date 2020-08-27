@@ -27,11 +27,6 @@ ensure-env() {
     export "$env=$val"
     return 0
   fi
-  if [ -n "$UPLOAD_SECRETS_DIR" ] && [ -f "$UPLOAD_SECRETS_DIR/$env" ]; then
-    val=$(cat "$UPLOAD_SECRETS_DIR/$env")
-    export "$env=$val"
-    return 0
-  fi
   if [ $# -eq 2 ]; then
     export "$env=$2"
     return 0
