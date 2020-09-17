@@ -11,14 +11,14 @@ if [ -n "$UPLOAD_SECRETS_DIR" ] && [ -d "$UPLOAD_SECRETS_DIR" ]; then
   done
 fi
 
-ensure-env UPLOAD_STORAGE
-ensure-env UPLOAD_SOURCE
+ensure-env DOWNLOAD_STORAGE
+ensure-env DOWNLOAD_TARGET
 
-case ${UPLOAD_STORAGE:?} in
+case ${DOWNLOAD_STORAGE:?} in
   azcopy) /opt/azcopy.sh ;;
   azure)  /opt/azcopy.sh ;;
-  dummy)  >&2 echo "Not uplading, hope you know what you doing." ;;
-  *)      >&2 echo "Unknown UPLOAD_STORAGE=$UPLOAD_STORAGE" ;;
+  dummy)  >&2 echo "Not downloading, hope you know what you doing." ;;
+  *)      >&2 echo "Unknown DOWNLOAD_STORAGE=$DOWNLOAD_STORAGE" ;;
 esac
 
 echo "UPLOAD DONE!"
